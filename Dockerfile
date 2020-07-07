@@ -1,4 +1,4 @@
-FROM davexacom/ace11002mqc91soe:latest
+FROM ibmcom/ace:11.0.0.8-r1-amd64
 # if using with Buildah in Tekton the ENV won't work
 #ENV BAR1=Test.bar
 
