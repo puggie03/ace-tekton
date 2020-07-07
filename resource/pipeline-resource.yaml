@@ -1,0 +1,9 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: ace-repo
+spec:
+  type: git
+  params:
+  - name: url
+    value: https://github.com/puggie03/ace-tekton.git
