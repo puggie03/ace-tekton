@@ -33,7 +33,7 @@ spec:
       type: image
       params:
       - name: url
-        value: image-registry.openshift-image-registry.svc:5000/bma-qa/$(params.git-repo-name):latest
+        value: image-registry.openshift-image-registry.svc:5000/bma-qa/ace:latest
 
   - apiVersion: tekton.dev/v1beta1
     kind: PipelineRun
@@ -52,4 +52,4 @@ spec:
           name: $(params.git-repo-name)-image-$(uid)
       params:
       - name: deployment-name
-        value: $(params.git-repo-name)
+        value: bmaqa-ibm-ace-server-icp4i-prod
