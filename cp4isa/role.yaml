@@ -1,0 +1,53 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    release: bmaqa
+  name: bmaqa-ibm-ace-server-icp4i-prod-role
+  namespace: bma-qa
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - services
+  - secrets
+  - deploymentconfigs
+  verbs:
+  - get
+  - list
+  - create
+  - delete
+- apiGroups:
+  - extensions
+  resources:
+  - deployments
+  verbs:
+  - get
+  - list
+- apiGroups:
+  - route.openshift.io
+  resources:
+  - routes
+  verbs:
+  - get
+  - list
+- apiGroups:
+  - apps
+  resources:
+  - statefulsets
+  verbs:
+  - get
+  - list
+- apiGroups:
+  - batch
+  resources:
+  - jobs
+  verbs:
+  - get
+  - list
+- apiGroups:
+  - "apps.openshift.io"
+  resources:
+  - deploymentconfigs
+  verbs:
+  - '*'
