@@ -17,7 +17,7 @@ metadata:
   namespace: bma-qa
 spec:
   progressDeadlineSeconds: 600
-  replicas: 3
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -105,17 +105,17 @@ spec:
         - name: ACE_DEFAULT_APPLICATION_NAME
         - name: ACE_ADMIN_SERVER_SECURITY
           value: "false"
-        image: cp.icr.io/cp/icp4i/ace/ibm-ace-server-prod:11.0.0.8-r1-amd64
+        image: __IMAGE__
         imagePullPolicy: IfNotPresent
-        livenessProbe:
-          exec:
-            command:
-            - chkacehealthy
-          failureThreshold: 1
-          initialDelaySeconds: 360
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 5
+        # livenessProbe:
+        #   exec:
+        #     command:
+        #     - chkacehealthy
+        #   failureThreshold: 1
+        #   initialDelaySeconds: 360
+        #   periodSeconds: 10
+        #   successThreshold: 1
+        #   timeoutSeconds: 5
         name: bmaqa-ibm-ace-server-icp4i-prod
         ports:
         - containerPort: 7600
@@ -127,15 +127,15 @@ spec:
         - containerPort: 7843
           name: ace-https
           protocol: TCP
-        readinessProbe:
-          exec:
-            command:
-            - chkaceready
-          failureThreshold: 1
-          initialDelaySeconds: 10
-          periodSeconds: 5
-          successThreshold: 1
-          timeoutSeconds: 3
+        # readinessProbe:
+        #   exec:
+        #     command:
+        #     - chkaceready
+        #   failureThreshold: 1
+        #   initialDelaySeconds: 10
+        #   periodSeconds: 5
+        #   successThreshold: 1
+        #   timeoutSeconds: 3
         resources:
           limits:
             cpu: "1"
