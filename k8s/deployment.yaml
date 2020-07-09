@@ -6,6 +6,7 @@ metadata:
     appconnectenterpriseContentUrl: https://ibm-ace-bma-qa-ibm-ace-dashboard-icp4i-prod:3443/v1/directories/Transformation_ESQL
     deployment.kubernetes.io/revision: "1"
     serverName: bmaqa
+  creationTimestamp: "2020-07-09T15:29:49Z"
   generation: 1
   labels:
     app.kubernetes.io/instance: bmaqa
@@ -15,9 +16,12 @@ metadata:
     release: bmaqa
   name: bmaqa-ibm-ace-server-icp4i-prod
   namespace: bma-qa
+  resourceVersion: "35128956"
+  selfLink: /apis/extensions/v1beta1/namespaces/bma-qa/deployments/bmaqa-ibm-ace-server-icp4i-prod
+  uid: 357698bf-40eb-46a6-86fc-bee70399a638
 spec:
   progressDeadlineSeconds: 600
-  replicas: 1
+  replicas: 3
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -77,7 +81,7 @@ spec:
         - name: ACE_CONTENT_SERVER_NAME
           value: ibm-ace-bma-qa-ibm-ace-dashboard-icp4i-prod
         - name: ACE_CONTENT_SERVER_TOKEN
-          value: 0c867f94-e6ab-4611-8799-415f12260d57
+          value: 3f63d881-44fd-454c-a38f-e53e99db545a
         - name: LOG_FORMAT
           value: basic
         - name: ACE_ENABLE_METRICS
@@ -105,17 +109,17 @@ spec:
         - name: ACE_DEFAULT_APPLICATION_NAME
         - name: ACE_ADMIN_SERVER_SECURITY
           value: "false"
-        image: __IMAGE__
+        image: cp.icr.io/cp/icp4i/ace/ibm-ace-server-prod:11.0.0.8-r1-amd64
         imagePullPolicy: IfNotPresent
-        # livenessProbe:
-        #   exec:
-        #     command:
-        #     - chkacehealthy
-        #   failureThreshold: 1
-        #   initialDelaySeconds: 360
-        #   periodSeconds: 10
-        #   successThreshold: 1
-        #   timeoutSeconds: 5
+        livenessProbe:
+          exec:
+            command:
+            - chkacehealthy
+          failureThreshold: 1
+          initialDelaySeconds: 360
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
         name: bmaqa-ibm-ace-server-icp4i-prod
         ports:
         - containerPort: 7600
@@ -127,15 +131,15 @@ spec:
         - containerPort: 7843
           name: ace-https
           protocol: TCP
-        # readinessProbe:
-        #   exec:
-        #     command:
-        #     - chkaceready
-        #   failureThreshold: 1
-        #   initialDelaySeconds: 10
-        #   periodSeconds: 5
-        #   successThreshold: 1
-        #   timeoutSeconds: 3
+        readinessProbe:
+          exec:
+            command:
+            - chkaceready
+          failureThreshold: 1
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 3
         resources:
           limits:
             cpu: "1"
@@ -308,3 +312,23 @@ spec:
           - key: contentServerCACert
             path: cacert.pem
           secretName: ibm-ace-bma-qa-ibm-ace-dashboard-icp4i-prod
+status:
+  availableReplicas: 3
+  conditions:
+  - lastTransitionTime: "2020-07-09T15:31:48Z"
+    lastUpdateTime: "2020-07-09T15:31:48Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2020-07-09T15:29:49Z"
+    lastUpdateTime: "2020-07-09T15:32:00Z"
+    message: ReplicaSet "bmaqa-ibm-ace-server-icp4i-prod-65ccd94cc4" has successfully
+      progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 1
+  readyReplicas: 3
+  replicas: 3
+  updatedReplicas: 3
