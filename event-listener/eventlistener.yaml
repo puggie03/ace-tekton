@@ -3,7 +3,7 @@ kind: EventListener
 metadata:
   name: ace-tekton-trig
 spec:
-  serviceAccountName: pipeline
+  serviceAccountName: pipeline-account
   triggers:
   - bindings:
     - name: ace-tekton-trig
