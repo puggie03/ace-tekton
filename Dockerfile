@@ -1,4 +1,4 @@
-FROM docker-registry-default.9.204.169.137.nip.io/bma-qa/ibm-ace-server-icp4i-prod:11.0.0.8-r1-amd64
+FROM docker-registry-default.9.204.169.137.nip.io/ace/ibm-ace-server-icp4i-prod:11.0.0.8-r1-amd64
 #FROM ibmcom/ace:11.0.0.8-r1-amd64
 # if using with Buildah in Tekton the ENV won't work
 # ENV BAR1=Transformation_ESQL.bar
