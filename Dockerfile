@@ -1,4 +1,5 @@
-FROM ibmcom/ace:11.0.0.8-r1-amd64
+FROM docker-registry-default.9.204.169.137.nip.io/bma-qa/ibm-ace-server-icp4i-prod:11.0.0.8-r1-amd64
+#FROM ibmcom/ace:11.0.0.8-r1-amd64
 # if using with Buildah in Tekton the ENV won't work
 # ENV BAR1=Transformation_ESQL.bar
 
@@ -10,7 +11,8 @@ COPY --chown=aceuser ./ace/bar/Transformation_ESQL.bar /tmp
 # Unzip the BAR file; need to use bash to make the profile work
 #RUN bash -c 'mqsibar -w /home/aceuser/ace-server -a /tmp/$BAR1 -c'
 RUN bash -c 'mqsibar -w /home/aceuser/ace-server -a /tmp/Transformation_ESQL.bar -c'
-RUN bash -c 'mqsibar -a /tmp/Transformation_ESQL.bar -c -w /sis01Wrk'
+ADD /tmp/Transformation_ESQL.bar /home/aceuser/initial-config/bars/
+#RUN bash -c 'mqsibar -a /tmp/Transformation_ESQL.bar -c -w /sis01Wrk'
 # USER aceuser
 # Switch off the admin REST API for the server run if required
 # RUN sed -i 's/adminRestApiPort/#adminRestApiPort/g' /home/aceuser/ace-server/server.conf.yaml 
