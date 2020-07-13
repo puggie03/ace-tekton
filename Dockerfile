@@ -12,7 +12,7 @@ COPY --chown=aceuser ./ace/bar/Transformation_ESQL.bar /tmp
 #RUN bash -c 'mqsibar -w /home/aceuser/ace-server -a /tmp/$BAR1 -c'
 RUN bash -c 'mqsibar -w /home/aceuser/ace-server -a /tmp/Transformation_ESQL.bar -c'
 #ADD /tmp/Transformation_ESQL.bar /home/aceuser/initial-config/bars/
-RUN bash -c 'mqsibar -a /tmp/Transformation_ESQL.bar -c -w /sis01Wrk'
+#RUN bash -c 'mqsibar -a /tmp/Transformation_ESQL.bar -c -w /sis01Wrk'
 # USER aceuser
 # Switch off the admin REST API for the server run if required
 # RUN sed -i 's/adminRestApiPort/#adminRestApiPort/g' /home/aceuser/ace-server/server.conf.yaml 
