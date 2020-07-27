@@ -1,5 +1,5 @@
-FROM cp.icr.io/cp/icp4i/ace/ibm-acecc-configurator-prod:11.0.0.8-r1-amd64
-#FROM ibmcom/ace:11.0.0.8-r1-amd64
+#FROM cp.icr.io/cp/icp4i/ace/ibm-acecc-configurator-prod:11.0.0.8-r1-amd64
+FROM ibmcom/ace:11.0.0.8-r1-amd64
 # if using with Buildah in Tekton the ENV won't work
 # ENV BAR1=Transformation_ESQL.bar
 
