@@ -5,6 +5,8 @@ metadata:
     release: bmaqa
   name: bmaqa-ibm-ace-server-icp4i-prod-role
   namespace: bma-qa
+env:
+- name: deployment
 rules:
 - apiGroups:
   - ""
