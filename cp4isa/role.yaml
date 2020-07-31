@@ -4,10 +4,8 @@ metadata:
   labels:
     release: dep-name
   name: dep-name-ibm-ace-server-icp4i-prod-role
-  namespace: ns
 env:
 - name: dep-name
-- name: ns
 rules:
 - apiGroups:
   - ""
