@@ -6,6 +6,7 @@ metadata:
   name: dep-name-ibm-ace-server-icp4i-prod-role
 env:
 - name: dep-name
+  value:
 rules:
 - apiGroups:
   - ""
