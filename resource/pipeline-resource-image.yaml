@@ -4,6 +4,9 @@ metadata:
   name: ace-image
 spec:
   type: image
+  env:
+  - name: ns
+    value: bma-qa
   params:
   - name: url
-    value: image-registry.openshift-image-registry.svc:5000/bma-qa/ace:latest
+    value: image-registry.openshift-image-registry.svc:5000/ns/ace:latest
