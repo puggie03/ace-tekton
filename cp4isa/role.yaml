@@ -2,10 +2,10 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   labels:
-    release: $(env.dep-name)
-  name: $(env.dep-name)-ibm-ace-server-icp4i-prod-role
+    release: bmaprod
+  name: bmaprod-ibm-ace-server-icp4i-prod-role
 env:
-- name: dep-name
+- name: bmaprod
 rules:
 - apiGroups:
   - ""
