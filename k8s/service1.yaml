@@ -1,14 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
+  env:
+  - name: dep-name
   labels:
-    app.kubernetes.io/instance: bmaqa
+    app.kubernetes.io/instance: dep-name
     app.kubernetes.io/managed-by: Tiller
     app.kubernetes.io/name: ibm-ace-server-icp4i-prod
     helm.sh/chart: ibm-ace-server-icp4i-prod
-    release: bmaqa
-  name: bmaqa-ibm-ace-server-icp4i-prod
-  namespace: bma-qa
+    release: dep-name
+  name: dep-name-ibm-ace-server-icp4i-prod
 spec:
   ports:
   - name: webui
@@ -24,9 +25,9 @@ spec:
     protocol: TCP
     targetPort: 7843
   selector:
-    app.kubernetes.io/instance: bmaqa
+    app.kubernetes.io/instance: dep-name
     app.kubernetes.io/managed-by: Tiller
     app.kubernetes.io/name: ibm-ace-server-icp4i-prod
     helm.sh/chart: ibm-ace-server-icp4i-prod
-    release: bmaqa
+    release: dep-name
   type: ClusterIP
