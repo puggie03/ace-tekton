@@ -1,14 +1,15 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
+  env:
+  - name: dep-name
   labels:
-    app.kubernetes.io/instance: bmaqa
+    app.kubernetes.io/instance: dep-name
     app.kubernetes.io/managed-by: Tiller
     app.kubernetes.io/name: ibm-ace-server-icp4i-prod
     helm.sh/chart: ibm-ace-server-icp4i-prod
-    release: bmaqa
-  name: bmaqa-ibm-ace-server-icp4i-prod-config-gen
-  namespace: bma-qa
+    release: dep-name
+  name: dep-name-ibm-ace-server-icp4i-prod-config-gen
 spec:
   activeDeadlineSeconds: 600
   backoffLimit: 6
@@ -17,7 +18,7 @@ spec:
   template:
     metadata:
       labels:
-        job-name: bmaqa-ibm-ace-server-icp4i-prod-config-gen
+        job-name: dep-name-ibm-ace-server-icp4i-prod-config-gen
     spec:
       affinity:
         nodeAffinity:
@@ -56,7 +57,7 @@ spec:
         terminationMessagePolicy: File
         volumeMounts:
         - mountPath: /server/
-          name: bmaqa-ibm-ace-server-icp4i-prod-create-configurator-config
+          name: dep-name-ibm-ace-server-icp4i-prod-create-configurator-config
       dnsPolicy: ClusterFirst
       restartPolicy: Never
       schedulerName: default-scheduler
@@ -64,11 +65,11 @@ spec:
         fsGroup: 1001
         runAsNonRoot: true
         runAsUser: 1001
-      serviceAccount: bmaqa-ibm-ace-server-icp4i-prod-serviceaccount
-      serviceAccountName: bmaqa-ibm-ace-server-icp4i-prod-serviceaccount
+      serviceAccount: dep-name-ibm-ace-server-icp4i-prod-serviceaccount
+      serviceAccountName: dep-name-ibm-ace-server-icp4i-prod-serviceaccount
       terminationGracePeriodSeconds: 30
       volumes:
       - configMap:
           defaultMode: 365
-          name: bmaqa-ibm-ace-server-icp4i-prod-create-configurator-config
-        name: bmaqa-ibm-ace-server-icp4i-prod-create-configurator-config
+          name: dep-name-ibm-ace-server-icp4i-prod-create-configurator-config
+        name: dep-name-ibm-ace-server-icp4i-prod-create-configurator-config
