@@ -1,22 +1,25 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
+  env:
+  - name: dep-name
+  - name: ns
+    value: bma-prod
   annotations:
     openshift.io/host.generated: "true"
   labels:
-    app.kubernetes.io/instance: bmaqa
+    app.kubernetes.io/instance: dep-name
     app.kubernetes.io/managed-by: Tiller
     app.kubernetes.io/name: ibm-ace-server-icp4i-prod
     helm.sh/chart: ibm-ace-server-icp4i-prod
-    release: bmaqa
-  name: bmaqa-http
-  namespace: bma-qa
+    release: dep-name
+  name: dep-name-http
 spec:
-  host: bmaqa-http-bma-qa.mycluster-336573-7668c7cb8fc5e368809b49af77a1e9c2-0000.eu-gb.containers.appdomain.cloud
+  host: dep-name-http-$(env.ns).mycluster-336573-7668c7cb8fc5e368809b49af77a1e9c2-0000.eu-gb.containers.appdomain.cloud
   port:
     targetPort: ace-http
   to:
     kind: Service
-    name: bmaqa-ibm-ace-server-icp4i-prod
+    name: dep-name-ibm-ace-server-icp4i-prod
     weight: 100
   wildcardPolicy: None
