@@ -10,7 +10,7 @@ metadata:
   env:
   - name: dep-name
   - name: ns
-    value: bma-qa
+    value: bma-prod
   labels:
     app.kubernetes.io/instance: dep-name
     app.kubernetes.io/managed-by: Tiller
