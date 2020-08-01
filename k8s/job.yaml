@@ -1,8 +1,6 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  env:
-  - name: dep-name
   labels:
     app.kubernetes.io/instance: dep-name
     app.kubernetes.io/managed-by: Tiller
