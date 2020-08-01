@@ -3,14 +3,10 @@ kind: Deployment
 metadata:
   annotations:
     appconnectenterprise: icp4i
-    appconnectenterpriseContentUrl: https://ibm-ace-$(env.ns)-ibm-ace-dashboard-icp4i-prod:3443/v1/directories/Transformation_ESQL
+    appconnectenterpriseContentUrl: https://ibm-ace-namespace-ibm-ace-dashboard-icp4i-prod:3443/v1/directories/Transformation_ESQL
     deployment.kubernetes.io/revision: "1"
     serverName: dep-name
   generation: 1
-  env:
-  - name: dep-name
-  - name: ns
-    value: bma-prod
   labels:
     app.kubernetes.io/instance: dep-name
     app.kubernetes.io/managed-by: Tiller
@@ -76,9 +72,9 @@ spec:
         - name: DEFAULT_CONTENT_SERVER
           value: "true"
         - name: ACE_CONTENT_SERVER_URL
-          value: https://ibm-ace-$(env.ns)-ibm-ace-dashboard-icp4i-prod:3443/v1/directories/Transformation_ESQL
+          value: https://ibm-ace-namespace-ibm-ace-dashboard-icp4i-prod:3443/v1/directories/Transformation_ESQL
         - name: ACE_CONTENT_SERVER_NAME
-          value: ibm-ace-$(env.ns)-ibm-ace-dashboard-icp4i-prod
+          value: ibm-ace-namespace-ibm-ace-dashboard-icp4i-prod
         - name: ACE_CONTENT_SERVER_TOKEN
           value: 3f63d881-44fd-454c-a38f-e53e99db545a
         - name: LOG_FORMAT
