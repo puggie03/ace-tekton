@@ -3,29 +3,32 @@ kind: Deployment
 metadata:
   annotations:
     appconnectenterprise: icp4i
-    appconnectenterpriseContentUrl: https://ibm-ace-bma-qa-ibm-ace-dashboard-icp4i-prod:3443/v1/directories/Transformation_ESQL
+    appconnectenterpriseContentUrl: https://ibm-ace-$(env.ns)-ibm-ace-dashboard-icp4i-prod:3443/v1/directories/Transformation_ESQL
     deployment.kubernetes.io/revision: "1"
-    serverName: bmaqa
+    serverName: dep-name
   generation: 1
+  env:
+  - name: dep-name
+  - name: ns
+    value: bma-qa
   labels:
-    app.kubernetes.io/instance: bmaqa
+    app.kubernetes.io/instance: dep-name
     app.kubernetes.io/managed-by: Tiller
     app.kubernetes.io/name: ibm-ace-server-icp4i-prod
     helm.sh/chart: ibm-ace-server-icp4i-prod
-    release: bmaqa
-  name: bmaqa-ibm-ace-server-icp4i-prod
-  namespace: bma-qa
+    release: dep-name
+  name: dep-name-ibm-ace-server-icp4i-prod
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app.kubernetes.io/instance: bmaqa
+      app.kubernetes.io/instance: dep-name
       app.kubernetes.io/managed-by: Tiller
       app.kubernetes.io/name: ibm-ace-server-icp4i-prod
       helm.sh/chart: ibm-ace-server-icp4i-prod
-      release: bmaqa
+      release: dep-name
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -42,12 +45,12 @@ spec:
         productVersion: 11.0.0.8
       creationTimestamp: null
       labels:
-        app.kubernetes.io/instance: bmaqa
+        app.kubernetes.io/instance: dep-name
         app.kubernetes.io/managed-by: Tiller
         app.kubernetes.io/name: ibm-ace-server-icp4i-prod
         helm.sh/chart: ibm-ace-server-icp4i-prod
-        release: bmaqa
-      name: bmaqa-ibm-ace-server-icp4i-prod
+        release: dep-name
+      name: dep-name-ibm-ace-server-icp4i-prod
     spec:
       affinity:
         nodeAffinity:
@@ -67,15 +70,15 @@ spec:
         - name: DEV_QMGR
           value: "false"
         - name: ACE_SERVER_NAME
-          value: bmaqa
+          value: dep-name
         - name: SERVICE_NAME
-          value: bmaqa-ibm-ace-server-icp4i-prod
+          value: dep-name-ibm-ace-server-icp4i-prod
         - name: DEFAULT_CONTENT_SERVER
           value: "true"
         - name: ACE_CONTENT_SERVER_URL
-          value: https://ibm-ace-bma-qa-ibm-ace-dashboard-icp4i-prod:3443/v1/directories/Transformation_ESQL
+          value: https://ibm-ace-$(env.ns)-ibm-ace-dashboard-icp4i-prod:3443/v1/directories/Transformation_ESQL
         - name: ACE_CONTENT_SERVER_NAME
-          value: ibm-ace-bma-qa-ibm-ace-dashboard-icp4i-prod
+          value: ibm-ace-$(env.ns)-ibm-ace-dashboard-icp4i-prod
         - name: ACE_CONTENT_SERVER_TOKEN
           value: 3f63d881-44fd-454c-a38f-e53e99db545a
         - name: LOG_FORMAT
@@ -85,22 +88,22 @@ spec:
         - name: ACE_ENABLE_OPEN_TRACING
           value: "false"
         - name: ACE_HTTP_ROUTE_NAME
-          value: bmaqa-http
+          value: dep-name-http
         - name: ACE_HTTPS_ROUTE_NAME
-          value: bmaqa-https
+          value: dep-name-https
         - name: ACE_ENDPOINT_TYPE
           value: http
         - name: ACE_KEYSTORE_PASSWORD
           valueFrom:
             secretKeyRef:
               key: keystorePassword
-              name: bmaqa-ibm-ace-server-icp4i-prod-configuration
+              name: dep-name-ibm-ace-server-icp4i-prod-configuration
               optional: true
         - name: ACE_TRUSTSTORE_PASSWORD
           valueFrom:
             secretKeyRef:
               key: truststorePassword
-              name: bmaqa-ibm-ace-server-icp4i-prod-configuration
+              name: dep-name-ibm-ace-server-icp4i-prod-configuration
               optional: true
         - name: ACE_DEFAULT_APPLICATION_NAME
         - name: ACE_ADMIN_SERVER_SECURITY
@@ -116,7 +119,7 @@ spec:
         #   periodSeconds: 10
         #   successThreshold: 1
         #   timeoutSeconds: 5
-        name: bmaqa-ibm-ace-server-icp4i-prod
+        name: dep-name-ibm-ace-server-icp4i-prod
         ports:
         - containerPort: 7600
           name: webui
@@ -181,14 +184,14 @@ spec:
       initContainers:
       - args:
         - -c
-        - until [ $(/usr/local/bin/kubectl get job bmaqa-ibm-ace-server-icp4i-prod-config-gen
+        - until [ $(/usr/local/bin/kubectl get job dep-name-ibm-ace-server-icp4i-prod-config-gen
           -o jsonpath="{.status.succeeded}") = 1 ]; do sleep 1; done && echo "WebUsers
           Created"
         command:
         - sh
         image: cp.icr.io/cp/icp4i/ace/ibm-acecc-configurator-prod:11.0.0.8-r1-amd64
         imagePullPolicy: IfNotPresent
-        name: bmaqa-ibm-ace-server-icp4i-prod-init
+        name: dep-name-ibm-ace-server-icp4i-prod-init
         resources:
           limits:
             cpu: 500m
@@ -213,8 +216,8 @@ spec:
         fsGroup: 1001
         runAsNonRoot: true
         runAsUser: 1000
-      serviceAccount: bmaqa-ibm-ace-server-icp4i-prod-serviceaccount
-      serviceAccountName: bmaqa-ibm-ace-server-icp4i-prod-serviceaccount
+      serviceAccount: dep-name-ibm-ace-server-icp4i-prod-serviceaccount
+      serviceAccountName: dep-name-ibm-ace-server-icp4i-prod-serviceaccount
       terminationGracePeriodSeconds: 30
       volumes:
       - name: webusers
@@ -232,7 +235,7 @@ spec:
           - key: auditusers
             path: audit-users.txt
           optional: true
-          secretName: bmaqa-ibm-ace-server-icp4i-prod
+          secretName: dep-name-ibm-ace-server-icp4i-prod
       - name: odbcini
         secret:
           defaultMode: 420
@@ -240,7 +243,7 @@ spec:
           - key: odbcini
             path: odbc.ini
           optional: true
-          secretName: bmaqa-ibm-ace-server-icp4i-prod-configuration
+          secretName: dep-name-ibm-ace-server-icp4i-prod-configuration
       - name: extensions
         secret:
           defaultMode: 420
@@ -248,7 +251,7 @@ spec:
           - key: extensions
             path: extensions.zip
           optional: true
-          secretName: bmaqa-ibm-ace-server-icp4i-prod-configuration
+          secretName: dep-name-ibm-ace-server-icp4i-prod-configuration
       - name: agent
         secret:
           defaultMode: 420
@@ -262,7 +265,7 @@ spec:
           - key: switch
             path: switch.json
           optional: true
-          secretName: bmaqa-ibm-ace-server-icp4i-prod-configuration
+          secretName: dep-name-ibm-ace-server-icp4i-prod-configuration
       - name: policy
         secret:
           defaultMode: 420
@@ -272,7 +275,7 @@ spec:
           - key: policyDescriptor
             path: policy.descriptor
           optional: true
-          secretName: bmaqa-ibm-ace-server-icp4i-prod-configuration
+          secretName: dep-name-ibm-ace-server-icp4i-prod-configuration
       - name: serverconf
         secret:
           defaultMode: 420
@@ -280,7 +283,7 @@ spec:
           - key: serverconf
             path: server.conf.yaml
           optional: true
-          secretName: bmaqa-ibm-ace-server-icp4i-prod-configuration
+          secretName: dep-name-ibm-ace-server-icp4i-prod-configuration
       - name: setdbparms
         secret:
           defaultMode: 420
@@ -288,7 +291,7 @@ spec:
           - key: setdbparms
             path: setdbparms.txt
           optional: true
-          secretName: bmaqa-ibm-ace-server-icp4i-prod-configuration
+          secretName: dep-name-ibm-ace-server-icp4i-prod-configuration
       - name: ssl
         secret:
           defaultMode: 420
@@ -300,11 +303,11 @@ spec:
           - key: tls.crt
             path: tls.crt.pem
           optional: true
-          secretName: bmaqa-ibm-ace-server-icp4i-prod-configuration
+          secretName: dep-name-ibm-ace-server-icp4i-prod-configuration
       - name: contentservertls
         secret:
           defaultMode: 420
           items:
           - key: contentServerCACert
             path: cacert.pem
-          secretName: ibm-ace-bma-qa-ibm-ace-dashboard-icp4i-prod
+          secretName: ibm-ace-$(env.ns)-ibm-ace-dashboard-icp4i-prod
