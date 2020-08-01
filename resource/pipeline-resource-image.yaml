@@ -2,12 +2,9 @@ apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:
   name: ace-image
-  env:
-  - name: ns
-    value: bma-qa
 spec:
   type: image
   params:
   - name: url
-    value: image-registry.openshift-image-registry.svc:5000/$(env.ns)/ace:latest
+    value: image-registry.openshift-image-registry.svc:5000/bma-qa/ace:latest
     
