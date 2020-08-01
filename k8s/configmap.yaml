@@ -18,7 +18,7 @@ data:
     apiVersion: v1
     kind: Secret
     metadata:
-      name: bmaqa-ibm-ace-server-icp4i-prod
+      name: dep-name-ibm-ace-server-icp4i-prod
       labels:
         app.kubernetes.io/name: "ibm-ace-server-icp4i-prod"
         helm.sh/chart: "ibm-ace-server-icp4i-prod"
