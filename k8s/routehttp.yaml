@@ -3,6 +3,7 @@ kind: Route
 metadata:
   env:
   - name: dep-name
+    value: bmaprod
   - name: ns
     value: bma-prod
   annotations:
