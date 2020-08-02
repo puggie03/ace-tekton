@@ -52,4 +52,4 @@ spec:
           name: $(params.git-repo-name)-image-$(uid)
       params:
       - name: deployment-name
-        value: dep-name-ibm-ace-server-icp4i-prod
+        value: bmaprod-ibm-ace-server-icp4i-prod
