@@ -11,6 +11,8 @@ spec:
     default: master
   - name: git-repo-name
     description: The name of the deployment to be created / patched
+  - name: dep-namespace
+    description: The namespace of the deployment
 
   resourcetemplates:
   - apiVersion: tekton.dev/v1alpha1
@@ -33,7 +35,7 @@ spec:
       type: image
       params:
       - name: url
-        value: image-registry.openshift-image-registry.svc:5000/bma-qa/ace:latest
+        value: image-registry.openshift-image-registry.svc:5000/$(params.dep-namespace)/ace:latest
 
   - apiVersion: tekton.dev/v1beta1
     kind: PipelineRun
