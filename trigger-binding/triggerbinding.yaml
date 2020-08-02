@@ -12,3 +12,5 @@ spec:
     value: $(body.head_commit.id)
   - name: dep-namespace
     value: bma-prod
+  - name: dep-name
+    value: bmaprod
