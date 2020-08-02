@@ -2,18 +2,18 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   env:
-  - name: dep-name
+  - name: __dep-name__
   annotations:
     openshift.io/host.generated: "true"
   labels:
-    app.kubernetes.io/instance: dep-name
+    app.kubernetes.io/instance: __dep-name__
     app.kubernetes.io/managed-by: Tiller
     app.kubernetes.io/name: ibm-ace-server-icp4i-prod
     helm.sh/chart: ibm-ace-server-icp4i-prod
-    release: dep-name
-  name: dep-name-https
+    release: __dep-name__
+  name: __dep-name__-https
 spec:
-  host: dep-name-https-namespace.mycluster-336573-7668c7cb8fc5e368809b49af77a1e9c2-0000.eu-gb.containers.appdomain.cloud
+  host: __dep-name__-https-__dep-namespace__.mycluster-336573-7668c7cb8fc5e368809b49af77a1e9c2-0000.eu-gb.containers.appdomain.cloud
   port:
     targetPort: ace-https
   tls:
@@ -21,6 +21,6 @@ spec:
     termination: passthrough
   to:
     kind: Service
-    name: dep-name-ibm-ace-server-icp4i-prod
+    name: __dep-name__-ibm-ace-server-icp4i-prod
     weight: 100
   wildcardPolicy: None
