@@ -12,7 +12,7 @@ data:
     sed -i "s/VIEWER_USER/$(echo "ibm-ace-dashboard-viewer "$(uuid -v4) | base64 -w 100)/g" /tmp/webusers.yaml
     sed -i "s/EDITOR_USER/$(echo "ibm-ace-dashboard-editor "$(uuid -v4) | base64 -w 100)/g" /tmp/webusers.yaml
     sed -i "s/AUDIT_USER/$(echo "ibm-ace-dashboard-audit "$(uuid -v4) | base64 -w 100)/g" /tmp/webusers.yaml
-    echo "Creating secret __dep-name__-ibm-ace-server-icp4i-prod for release "dep-name""
+    echo "Creating secret __dep-name__-ibm-ace-server-icp4i-prod for release "__dep-name__""
     kubectl apply -f /tmp/webusers.yaml
   webusers.yaml: |
     apiVersion: v1
@@ -23,7 +23,7 @@ data:
         app.kubernetes.io/name: "ibm-ace-server-icp4i-prod"
         helm.sh/chart: "ibm-ace-server-icp4i-prod"
         app.kubernetes.io/managed-by: "Tiller"
-        app.kubernetes.io/instance: "dep-name"
+        app.kubernetes.io/instance: "__dep-name__"
         release: "__dep-name__"
     type: Opaque
     data:
