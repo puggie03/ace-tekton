@@ -13,6 +13,8 @@ spec:
     description: The name of the deployment to be created / patched
   - name: dep-namespace
     description: The namespace of the deployment
+  - name: dep-name
+    description: Name of your deployment
 
   resourcetemplates:
   - apiVersion: tekton.dev/v1alpha1
@@ -54,4 +56,4 @@ spec:
           name: $(params.git-repo-name)-image-$(uid)
       params:
       - name: deployment-name
-        value: bmaprod-ibm-ace-server-icp4i-prod
+        value: $(params.dep-name)-ibm-ace-server-icp4i-prod
