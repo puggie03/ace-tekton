@@ -18,6 +18,8 @@ spec:
       command: ["/bin/bash", "-c"]
       args:
         - |-
+          sed -i 's/dep-name/bmaprod/g' $(inputs.params.manifest_dir)
+          sed -i 's/namespace/bma-prod/g' $(inputs.params.manifest_dir)
           echo Applying manifests in $(inputs.params.manifest_dir) directory
           oc apply -f $(inputs.params.manifest_dir)
           echo -----------------------------------
