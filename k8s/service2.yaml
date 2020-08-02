@@ -5,22 +5,22 @@ metadata:
     prometheus.io/port: "9483"
     prometheus.io/scrape: "true"
   labels:
-    app.kubernetes.io/instance: dep-name
+    app.kubernetes.io/instance: __dep-name__
     app.kubernetes.io/managed-by: Tiller
     app.kubernetes.io/name: ibm-ace-server-icp4i-prod
     helm.sh/chart: ibm-ace-server-icp4i-prod
-    release: dep-name
-  name: dep-name-ibm-ace-server-icp4i-prod-ace-metrics
+    release: __dep-name__
+  name: __dep-name__-ibm-ace-server-icp4i-prod-ace-metrics
 spec:
   ports:
   - port: 9483
     protocol: TCP
     targetPort: 9483
   selector:
-    app.kubernetes.io/instance: dep-name
+    app.kubernetes.io/instance: __dep-name__
     app.kubernetes.io/managed-by: Tiller
     app.kubernetes.io/name: ibm-ace-server-icp4i-prod
     helm.sh/chart: ibm-ace-server-icp4i-prod
-    release: dep-name
+    release: __dep-name__
   sessionAffinity: None
   type: ClusterIP
