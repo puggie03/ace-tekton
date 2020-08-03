@@ -3,7 +3,7 @@ FROM ibmcom/ace:11.0.0.8-r1-amd64
 # if using with Buildah in Tekton the ENV won't work
 # ENV BAR1=Transformation_ESQL.bar
 
-RUN sed -i 's/dep-name/bmaprod/g' k8s/configmap.yaml
+RUN sed -i 's/dep-name/bmaprod/g' https://github.com/puggie03/ace-tekton/k8s/configmap.yaml
 
 # Copy in the bar file to a temporary directory
 #COPY --chown=aceuser ./ace/bar/$BAR1 /tmp
