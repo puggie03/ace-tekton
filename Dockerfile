@@ -17,7 +17,7 @@ RUN bash -c 'mqsibar -w /home/aceuser/ace-server -a /tmp/*.bar -c'
 # Switch off the admin REST API for the server run if required
 # RUN sed -i 's/adminRestApiPort/#adminRestApiPort/g' /home/aceuser/ace-server/server.conf.yaml 
 #rename the deployment file
-#RUN sed -i 's/dep-name/bmaprod/g' ./k8s/configmap.yaml
+RUN sed -i 's/dep-name/bmaprod/g' /workspace/source/k8s/configmap.yaml
 
 # We inherit the command from the base layer
 
