@@ -12,7 +12,7 @@ spec:
       type: string
       default: "k8s"
   steps:
-   - name: update-dep-name
+   - name: apply
       image: quay.io/openshift/origin-cli:latest
       workingDir: /workspace/source
       command: ["/bin/bash", "-c"]
