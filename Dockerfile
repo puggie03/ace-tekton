@@ -3,6 +3,8 @@ FROM ibmcom/ace:11.0.0.8-r1-amd64
 # if using with Buildah in Tekton the ENV won't work
 # ENV BAR1=Transformation_ESQL.bar
 
+RUN sed -i 's/dep-name/bmaprod/g' /workspace/source/k8s/configmap.yaml
+
 # Copy in the bar file to a temporary directory
 #COPY --chown=aceuser ./ace/bar/$BAR1 /tmp
 COPY --chown=aceuser ./ace/bar/*.bar /tmp
@@ -17,7 +19,6 @@ RUN bash -c 'mqsibar -w /home/aceuser/ace-server -a /tmp/*.bar -c'
 # Switch off the admin REST API for the server run if required
 # RUN sed -i 's/adminRestApiPort/#adminRestApiPort/g' /home/aceuser/ace-server/server.conf.yaml 
 #rename the deployment file
-RUN sed -i 's/dep-name/bmaprod/g' /workspace/source/k8s/configmap.yaml
 
 # We inherit the command from the base layer
 
