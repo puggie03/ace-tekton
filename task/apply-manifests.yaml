@@ -12,21 +12,13 @@ spec:
       type: string
       default: "k8s"
   steps:
-   - name: apply
-      image: quay.io/openshift/origin-cli:latest
-      workingDir: /workspace/source
-      command: ["/bin/bash", "-c"]
-      args:
-        - |-
-          echo Updating deployment name in $(inputs.params.manifest_dir) directory
-          sed -i 's/dep-name:/bmaprod/g' $(inputs.params.manifest_dir)
-          echo -----------------------------------
     - name: apply
       image: quay.io/openshift/origin-cli:latest
       workingDir: /workspace/source
       command: ["/bin/bash", "-c"]
       args:
         - |-
-          echo  Hello Applying manifests in $(inputs.params.manifest_dir) directory
+          echo Applying manifests in $(inputs.params.manifest_dir) directory
+          sed -i 's/__dep-name__/bmaprod/g' $(inputs.params.manifest_dir)
           oc apply -f $(inputs.params.manifest_dir)
           echo -----------------------------------
