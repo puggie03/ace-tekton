@@ -19,7 +19,7 @@ spec:
       args:
         - |-
           echo Applying manifests in $(inputs.params.manifest_dir) directory
-          sed -i 's/__dep-name__/bmaprod/g' $(inputs.params.manifest_dir)
+          sed -i 's/__dep-name__/bmaprod/g' $(inputs.params.manifest_dir)/configmap.yaml
           sed -i 's/__dep-namespace__/bma-prod/g' $(inputs.params.manifest_dir)
           oc apply -f $(inputs.params.manifest_dir)
           echo -----------------------------------
