@@ -17,7 +17,7 @@ RUN bash -c 'mqsibar -w /home/aceuser/ace-server -a /tmp/*.bar -c'
 #RUN bash -c 'mqsibar -a /tmp/Transformation_ESQL.bar -c -w /sis01Wrk'
 # USER aceuser
 # Switch off the admin REST API for the server run if required
-# RUN sed -i 's/adminRestApiPort/#adminRestApiPort/g' /home/aceuser/ace-server/server.conf.yaml 
+RUN sed -i 's/adminRestApiPort/#adminRestApiPort/g' /home/aceuser/ace-server/server.conf.yaml 
 #rename the deployment file
 
 # We inherit the command from the base layer
