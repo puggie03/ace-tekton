@@ -1,5 +1,7 @@
 apiVersion: v1
 kind: ServiceAccount
+imagePullSecrets:
+- name: ibm-entitlement-key
 metadata:
   labels:
     app.kubernetes.io/instance: dep-name
