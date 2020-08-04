@@ -4,18 +4,18 @@ metadata:
   annotations:
     openshift.io/host.generated: "true"
   labels:
-    app.kubernetes.io/instance: __dep-name__
+    app.kubernetes.io/instance: dep-name
     app.kubernetes.io/managed-by: Tiller
     app.kubernetes.io/name: ibm-ace-server-icp4i-prod
     helm.sh/chart: ibm-ace-server-icp4i-prod
-    release: __dep-name__
-  name: __dep-name__-http
+    release: dep-name
+  name: dep-name-http
 spec:
-  host: __dep-name__-http-__dep-namespace__.mycluster-336573-7668c7cb8fc5e368809b49af77a1e9c2-0000.eu-gb.containers.appdomain.cloud
+  host: dep-name-http-dep-namespace.mycluster-336573-7668c7cb8fc5e368809b49af77a1e9c2-0000.eu-gb.containers.appdomain.cloud
   port:
     targetPort: ace-http
   to:
     kind: Service
-    name: __dep-name__-ibm-ace-server-icp4i-prod
+    name: dep-name-ibm-ace-server-icp4i-prod
     weight: 100
   wildcardPolicy: None
