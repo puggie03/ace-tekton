@@ -19,6 +19,10 @@ spec:
       args:
         - |-
           echo Applying manifests in $(inputs.params.manifest_dir) directory
+          sed -i 's/dep-namespace/bma-prod/g' $(inputs.params.manifest_dir)/deployment.yaml
+          sed -i 's/dep-namespace/bma-prod/g' $(inputs.params.manifest_dir)/routehttp.yaml
+          sed -i 's/dep-namespace/bma-prod/g' $(inputs.params.manifest_dir)/routehttps.yaml
+          sed -i 's/dep-namespace/bma-prod/g' $(inputs.params.manifest_dir)/routehttps.yaml
           sed -i 's/dep-name/bmaprod/g' $(inputs.params.manifest_dir)/configmap.yaml
           sed -i 's/dep-name/bmaprod/g' $(inputs.params.manifest_dir)/deployment.yaml
           sed -i 's/dep-name/bmaprod/g' $(inputs.params.manifest_dir)/job.yaml
@@ -26,9 +30,5 @@ spec:
           sed -i 's/dep-name/bmaprod/g' $(inputs.params.manifest_dir)/routehttps.yaml
           sed -i 's/dep-name/bmaprod/g' $(inputs.params.manifest_dir)/service1.yaml
           sed -i 's/dep-name/bmaprod/g' $(inputs.params.manifest_dir)/service2.yaml
-          sed -i 's/dep-namespace/bma-prod/g' $(inputs.params.manifest_dir)/deployment.yaml
-          sed -i 's/dep-namespace/bma-prod/g' $(inputs.params.manifest_dir)/routehttp.yaml
-          sed -i 's/dep-namespace/bma-prod/g' $(inputs.params.manifest_dir)/routehttps.yaml
-          sed -i 's/dep-namespace/bma-prod/g' $(inputs.params.manifest_dir)/routehttps.yaml
           oc apply -f $(inputs.params.manifest_dir)
           echo -----------------------------------
