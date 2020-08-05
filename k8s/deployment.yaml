@@ -74,7 +74,7 @@ spec:
         - name: ACE_CONTENT_SERVER_URL
           value: https://ibm-ace-dep-namespace-ibm-ace-dashboard-icp4i-prod:3443/v1/directories/Transformation_ESQL
         - name: ACE_CONTENT_SERVER_NAME
-          value: ibm-ace-dep-namespace-ibm-ace-dashboard-icp4i-prod
+          value: ibm-ace-ace-ibm-ace-dashboard-icp4i-prod
         - name: ACE_CONTENT_SERVER_TOKEN
           value: 3f63d881-44fd-454c-a38f-e53e99db545a
         - name: LOG_FORMAT
